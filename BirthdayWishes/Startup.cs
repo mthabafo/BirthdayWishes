@@ -1,3 +1,4 @@
+using BirthdayWishes.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,10 @@ namespace BirthdayWishes
         {
 
             services.AddControllers();
+            services.AddHttpClient<IEmployeesService, EmployeesService>(c => {
+                c.BaseAddress = new Uri("https://interview-assessment-1.realmdigital.co.za/employees");
+               // c.DefaultRequestHeaders.Add("Accept", "application/.json");
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BirthdayWishes", Version = "v1" });
