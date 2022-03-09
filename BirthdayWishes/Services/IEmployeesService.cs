@@ -9,6 +9,7 @@ namespace BirthdayWishes.Services
 {
     public interface IEmployeesService
     {
-        Task<IEnumerable<Employee>> GetAllEmployees();
+        // Task<IEnumerable<Employee>> GetAllEmployees();
+        void GetAllEmployees();
     }
 }

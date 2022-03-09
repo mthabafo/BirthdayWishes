@@ -8,61 +8,53 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
 {
     public class ComputeBirthdayWish
     {
-        Employee emp1 = new Employee
+        public void SendBirthdayWishes(List<Employee> empList, int[] doNotSend) 
         {
-            FirstName = "John",
-            LastName = "Dore",
-            DateOfBirth = DateTime.Parse("12-10-88"),
-            EmploymentStartDate = DateTime.Parse("01-13-2020"),
-            EmploymentEndDate = "28-02-2022",
-            LastNotification = null
-        };
-
-        Employee emp2 = new Employee
-        {
-            FirstName = "Luke",
-            LastName = "Madani",
-            DateOfBirth = DateTime.Parse("09-03-88"),
-            EmploymentStartDate = DateTime.Parse("01-13-2020"),
-            EmploymentEndDate = null,
-            LastNotification = "09-03-2020"
-        };
-
-        Employee emp3 = new Employee
-        {
-            FirstName = "Lizzy",
-            LastName = "Castle",
-            DateOfBirth = DateTime.Parse("09-03-83"),
-            EmploymentStartDate = DateTime.Parse("01-13-2020"),
-            EmploymentEndDate = null,
-            LastNotification = null
-        };
-
-        List<Employee> EmpList = new List<Employee>();      
-
-        public void checkEmployeesWithBirthday() 
-        {
-            EmpList.Add(emp1);
-            EmpList.Add(emp2);
-            EmpList.Add(emp3);
-
-            foreach (Employee employee in EmpList) 
+            foreach (Employee employee in empList) 
             {
-                
-                if (employee.DateOfBirth.Equals(DateTime.Today) && 
-                    String.IsNullOrEmpty(employee.EmploymentEndDate)) 
-                {
+                bool dob = IsBirthday(employee);
+                bool withUs = IsEmployeeWithUs(employee);
+                bool doNotWish = DoNotSendWishes(employee, doNotSend);
 
+                if (IsBirthday(employee) && 
+                    IsEmployeeWithUs(employee) &&
+                    !DoNotSendWishes(employee, doNotSend))
+                {
+                    string message = "Happy birthday " + employee.FirstName + " " + employee.LastName;  
                 }
             }
         }
 
+        public bool IsBirthday(Employee empList) 
+        {
+            if (empList.DateOfBirth.Day.Equals(DateTime.Today.Day) && empList.DateOfBirth.Month.Equals(DateTime.Today.Month))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if the employee is still employed and returns true if so.
+        /// </summary>
         public bool IsEmployeeWithUs(Employee empList) 
         {
             if (String.IsNullOrEmpty(empList.EmploymentEndDate) && empList.EmploymentStartDate <= DateTime.Today)
                 return true;
             else
                 return false;
+        }
+
+        /// <summary>
+        /// Checks if the employee do not wish to receive birthday wishes and returns true if so.
+        /// </summary>
+        public bool DoNotSendWishes(Employee empList, int[] doNotSendArr) 
+        {
+            for (int i = 0; i < doNotSendArr.Length; i++)
+            {
+                if (empList.Id == doNotSendArr[i])
+                    return true;
+            }
+            return false;
         }
     }
 }

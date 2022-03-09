@@ -27,7 +27,8 @@ namespace BirthdayWishes.Controllers
         {
             try
             {
-                var employeesList = await _employeesService.GetAllEmployees();
+                // var employeesList = await _employeesService.GetAllEmployees();
+                _employeesService.GetAllEmployees();
             }
             catch (Exception ex) 
             {
