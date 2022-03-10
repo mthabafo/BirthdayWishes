@@ -12,13 +12,15 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
         {
             foreach (Employee employee in empList) 
             {
-              // bool dob = IsBirthday(employee);
-              // bool withUs = IsEmployeeWithUs(employee);
-              // bool doNotWish = DoNotSendWishes(employee, doNotSend);
+                 bool dob = IsBirthday(employee);
+                 bool withUs = IsEmployeeWithUs(employee);
+                 bool doNotWish = DoNotSendWishes(employee, doNotSend);
+                bool notified = HasBeenNotified(employee);
 
                 if (IsBirthday(employee) && 
                     IsEmployeeWithUs(employee) &&
-                    !DoNotSendWishes(employee, doNotSend))
+                    !DoNotSendWishes(employee, doNotSend) && !HasBeenNotified(employee)
+                    )
                 {
                     string message = "Happy birthday " + employee.FirstName + " " + employee.LastName;  
                 }
@@ -55,6 +57,21 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
                     return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Checks if the employee has been sent a message or not
+        /// </summary>
+        
+        public bool HasBeenNotified(Employee empList) 
+        {
+            DateTime lastNotificationDate;
+            DateTime.TryParse(empList.LastNotification, out lastNotificationDate);
+
+            if (String.IsNullOrEmpty(empList.LastNotification) || !lastNotificationDate.Date.Equals(DateTime.Today.Date))
+                return false;
+
+            return true;
         }
     }
 }

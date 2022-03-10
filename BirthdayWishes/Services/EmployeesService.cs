@@ -61,12 +61,24 @@ namespace BirthdayWishes.Services
                 LastNotification = null
             };
 
+            Employee emp4 = new Employee
+            {
+                Id = 100,
+                FirstName = "Lizzy",
+                LastName = "Castle",
+                DateOfBirth = DateTime.Parse("1983-03-10T00:00:00"),
+                EmploymentStartDate = DateTime.Parse("2021-01-10T00:00:00"),
+                EmploymentEndDate = null,
+                LastNotification = "2021-03-10T00:00:00"
+            };
+
             List<Employee> EmpList = new List<Employee>();
             int[] doNotSend = { 101, 200, 111 };
 
             EmpList.Add(emp1);
             EmpList.Add(emp2);
             EmpList.Add(emp3);
+            EmpList.Add(emp4);
 
             ComputeBirthdayWish obj = new ComputeBirthdayWish();
             obj.SendBirthdayWishes(EmpList, doNotSend);
