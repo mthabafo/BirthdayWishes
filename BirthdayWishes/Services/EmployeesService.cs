@@ -22,7 +22,7 @@ namespace BirthdayWishes.Services
         }
         public async void GetAllEmployees(Task<List<int>> doNotSendList)
         {
-            var response = await _httpClient.GetAsync(_httpClient.BaseAddress.AbsoluteUri);
+            var response = await _httpClient.GetAsync(_httpClient.BaseAddress);
             var responseString = response.Content.ReadAsStringAsync();
 
             #region Testing 
@@ -44,10 +44,10 @@ namespace BirthdayWishes.Services
                 Id = 212,
                 FirstName = "Luke",
                 LastName = "Madani",
-                DateOfBirth = DateTime.Parse("2001-03-10T00:00:00"),
-                EmploymentStartDate = DateTime.Parse("2010-04-10T00:00:00"),
+                DateOfBirth = DateTime.Parse("2001-03-11T00:00:00"),
+                EmploymentStartDate = DateTime.Parse("2010-04-11T00:00:00"),
                 EmploymentEndDate = null,
-                LastNotification = "2001-03-10T00:00:00"
+                LastNotification = "2001-03-11T00:00:00"
             };
 
             Employee emp3 = new Employee
@@ -55,8 +55,8 @@ namespace BirthdayWishes.Services
                 Id = 101,
                 FirstName = "Lizzy",
                 LastName = "Castle",
-                DateOfBirth = DateTime.Parse("1983-03-10T00:00:00"),
-                EmploymentStartDate = DateTime.Parse("2021-03-10T00:00:00"),
+                DateOfBirth = DateTime.Parse("1983-03-11T00:00:00"),
+                EmploymentStartDate = DateTime.Parse("2021-03-11T00:00:00"),
                 EmploymentEndDate = null,
                 LastNotification = null
             };
@@ -66,10 +66,10 @@ namespace BirthdayWishes.Services
                 Id = 100,
                 FirstName = "Lizzy",
                 LastName = "Castle",
-                DateOfBirth = DateTime.Parse("1983-03-10T00:00:00"),
-                EmploymentStartDate = DateTime.Parse("2021-01-10T00:00:00"),
+                DateOfBirth = DateTime.Parse("1983-03-11T00:00:00"),
+                EmploymentStartDate = DateTime.Parse("2021-01-11T00:00:00"),
                 EmploymentEndDate = null,
-                LastNotification = "2021-03-10T00:00:00"
+                LastNotification = "2021-03-11T00:00:00"
             };
 
             List<Employee> EmpList = new List<Employee>();
@@ -90,7 +90,7 @@ namespace BirthdayWishes.Services
 
             var result = responseObject?.Employees?.Select(i => new Employee
             {
-                Id = i.Id,
+                Id = i.id,
                 FirstName = i.name,
                 LastName = i.lastname,
                 DateOfBirth = i.dateOfBirth,

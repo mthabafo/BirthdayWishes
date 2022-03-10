@@ -15,12 +15,17 @@ namespace BirthdayWishes.Controllers
     {
         private readonly IDoNotSendService _doNotSendService;
         private readonly IEmployeesService _employeesService;
-        
-        public EmployeesController(IDoNotSendService doNotSendService, IEmployeesService employeesService) 
-        {
-            _doNotSendService = doNotSendService;
-            _employeesService = employeesService;
-        }
+
+         public EmployeesController(IDoNotSendService doNotSendService, IEmployeesService employeesService) 
+         {
+             _doNotSendService = doNotSendService;
+             _employeesService = employeesService;
+         }
+
+       // public EmployeesController(IEmployeesService employeesService)
+       // {
+       //     _employeesService = employeesService;
+       // }
 
         [HttpGet]
         public void Get() 
@@ -28,6 +33,7 @@ namespace BirthdayWishes.Controllers
             try
             {
                 Task<List<int>> doNoSendList = _doNotSendService.GetAllDoNotSend();
+               // Task<List<int>> doNoSendList = null;
 
                 // We pass the doNotSendList list as an argument 
                 _employeesService.GetAllEmployees(doNoSendList);

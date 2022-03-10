@@ -13,15 +13,10 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
         /// </summary>
         public void SendBirthdayWishes(List<Employee> empList, int[] doNotSend) 
         {
-            List<LastNotification> lastNotifications = null;
+            List<LastNotification> lastNotifications = new List<LastNotification>();
 
             foreach (Employee employee in empList) 
             {
-                 bool dob = IsBirthday(employee);
-                 bool withUs = IsEmployeeWithUs(employee);
-                 bool doNotWish = DoNotSendWishes(employee, doNotSend);
-                 bool notified = HasBeenNotified(employee);
-
                 if (IsBirthday(employee) && 
                     IsEmployeeWithUs(employee) &&
                     !DoNotSendWishes(employee, doNotSend) && !HasBeenNotified(employee)
@@ -106,9 +101,9 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
         /// <returns> The employee Id and LastNotification only </returns>
         public LastNotification UpdateLastNotification(Employee employee) 
         {
-            LastNotification lastNotification = new LastNotification(
-                employee.Id, 
-                employee.LastNotification);
+            LastNotification lastNotification = new LastNotification();
+            lastNotification.Id = employee.Id; 
+            lastNotification.LastNotificationDate = DateTime.Now.ToString();
 
             return lastNotification;
         }

@@ -18,6 +18,7 @@ namespace BirthdayWishes.Services
         }
         public async Task<List<int>> GetAllDoNotSend()
         {
+            //var response = await _httpClient.GetAsync("https://interview-assessment-1.realmdigital.co.za/do-not-send-birthday-wishes");
             var response = await _httpClient.GetAsync(_httpClient.BaseAddress.AbsoluteUri);
             var res = response.Content.ReadAsStringAsync();
 

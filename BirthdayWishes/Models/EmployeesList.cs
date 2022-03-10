@@ -20,10 +20,10 @@ namespace BirthdayWishes.Models
         public DateTime employmentStartDate { get; set; }
         public string employmentEndDate { get; set; }
         public string lastNotification { get; set; }
-        public int Id { get; set; }
-        public string Customer { get; set; }
-        public int Quantity { get; set; }
-        public int Price { get; set; }
+       // public int Id { get; set; }
+       // public string Customer { get; set; }
+       // public int Quantity { get; set; }
+       // public int Price { get; set; }
     }
 
 }
