@@ -29,7 +29,9 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
 
         public bool IsBirthday(Employee empList) 
         {
-            if (empList.DateOfBirth.Day.Equals(DateTime.Today.Day) && empList.DateOfBirth.Month.Equals(DateTime.Today.Month))
+            if ((empList.DateOfBirth.Day.Equals(DateTime.Today.Day) && empList.DateOfBirth.Month.Equals(DateTime.Today.Month)) ||
+                (!IsLeapYear() && DateTime.Today.Day == 28 && DateTime.Today.Month == 2) && 
+                (empList.DateOfBirth.Day == 29 && empList.DateOfBirth.Month == 2))
                 return true;
 
             return false;
@@ -72,6 +74,19 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
                 return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// Checks if the current year is leap or not
+        /// </summary>
+        public bool IsLeapYear() 
+        {
+            int Year = DateTime.Today.Year;
+
+            if (((Year % 4 == 0) && (Year % 100 != 0)) || (Year % 400 == 0))
+                return true;
+
+            return false;
         }
     }
 }
