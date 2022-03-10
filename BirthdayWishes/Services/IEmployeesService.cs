@@ -9,7 +9,6 @@ namespace BirthdayWishes.Services
 {
     public interface IEmployeesService
     {
-        // Task<IEnumerable<Employee>> GetAllEmployees();
-        void GetAllEmployees();
+        void GetAllEmployees(Task<List<int>> doNotSend);
     }
 }

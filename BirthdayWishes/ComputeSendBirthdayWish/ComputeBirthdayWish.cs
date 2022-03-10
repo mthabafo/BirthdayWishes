@@ -8,6 +8,9 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
 {
     public class ComputeBirthdayWish
     {
+        /// <summary>
+        /// Send birthday wishes to employees with 
+        /// </summary>
         public void SendBirthdayWishes(List<Employee> empList, int[] doNotSend) 
         {
             foreach (Employee employee in empList) 
@@ -15,18 +18,23 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
                  bool dob = IsBirthday(employee);
                  bool withUs = IsEmployeeWithUs(employee);
                  bool doNotWish = DoNotSendWishes(employee, doNotSend);
-                bool notified = HasBeenNotified(employee);
+                 bool notified = HasBeenNotified(employee);
 
                 if (IsBirthday(employee) && 
                     IsEmployeeWithUs(employee) &&
                     !DoNotSendWishes(employee, doNotSend) && !HasBeenNotified(employee)
                     )
                 {
-                    string message = "Happy birthday " + employee.FirstName + " " + employee.LastName;  
+                    // This message will be sent to email, for now we will display it on Console to keep things simple
+                    string message = String.Format("Happy birthday {0} {1}", employee.FirstName, employee.LastName);
+                    Console.WriteLine(message);
                 }
             }
         }
 
+        /// <summary>
+        /// Checks if today's date is a birthday to the provided employee
+        /// </summary>
         public bool IsBirthday(Employee empList) 
         {
             if ((empList.DateOfBirth.Day.Equals(DateTime.Today.Day) && empList.DateOfBirth.Month.Equals(DateTime.Today.Month)) ||

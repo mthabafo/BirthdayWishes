@@ -20,7 +20,7 @@ namespace BirthdayWishes.Services
         {
             _httpClient = httpClient;
         }
-        public async void GetAllEmployees()
+        public async void GetAllEmployees(Task<List<int>> doNotSendList)
         {
             var response = await _httpClient.GetAsync(_httpClient.BaseAddress.AbsoluteUri);
             var responseString = response.Content.ReadAsStringAsync();
@@ -86,7 +86,6 @@ namespace BirthdayWishes.Services
             #endregion
 
             var responseStream = await response.Content.ReadAsStreamAsync();
-
             var responseObject = await JsonSerializer.DeserializeAsync<EmployeesList>(responseStream);
 
             var result = responseObject?.Employees?.Select(i => new Employee
@@ -98,10 +97,10 @@ namespace BirthdayWishes.Services
                 EmploymentStartDate = i.employmentStartDate,
                 EmploymentEndDate = i.employmentEndDate,
                 LastNotification = i.lastNotification
-
             });
 
-           // return result;
+            ComputeBirthdayWish computeBirthdayWish = new ComputeBirthdayWish();
+           // computeBirthdayWish.SendBirthdayWishes(result, doNotSend);
         }
     }
 }

@@ -27,12 +27,14 @@ namespace BirthdayWishes.Controllers
         {
             try
             {
-                var doNoSendList = _doNotSendService.GetAllDoNotSend();
+                Task<List<int>> doNoSendList = _doNotSendService.GetAllDoNotSend();
 
-                _employeesService.GetAllEmployees();
+                // We pass the doNotSendList list as an argument 
+                _employeesService.GetAllEmployees(doNoSendList);
             }
             catch (Exception ex) 
             {
+                Console.WriteLine(ex.Message);
             }
         }
     }
