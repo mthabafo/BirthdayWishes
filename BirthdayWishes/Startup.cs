@@ -27,12 +27,18 @@ namespace BirthdayWishes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+            
             services.AddHttpClient<IEmployeesService, EmployeesService>(c => {
                 c.BaseAddress = new Uri("https://interview-assessment-1.realmdigital.co.za/employees");
-               // c.DefaultRequestHeaders.Add("Accept", "application/.json");
+                c.DefaultRequestHeaders.Add("Accept", "application/.json");
             });
+
+            services.AddHttpClient<IDoNotSendService, DoNotSendService>(c => {
+                c.BaseAddress = new Uri("https://interview-assessment-1.realmdigital.co.za/do-not-send-birthday-wishes");
+                c.DefaultRequestHeaders.Add("Accept", "application/.json");
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BirthdayWishes", Version = "v1" });

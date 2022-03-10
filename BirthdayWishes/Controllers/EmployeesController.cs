@@ -13,27 +13,27 @@ namespace BirthdayWishes.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        private readonly IDoNotSendService _doNotSendService;
         private readonly IEmployeesService _employeesService;
-
-        public EmployeesController(IConfiguration configuration, IEmployeesService employeesService) 
+        
+        public EmployeesController(IDoNotSendService doNotSendService, IEmployeesService employeesService) 
         {
-            _configuration = configuration;         
+            _doNotSendService = doNotSendService;
             _employeesService = employeesService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() 
+        public void Get() 
         {
             try
             {
-                // var employeesList = await _employeesService.GetAllEmployees();
+                var doNoSendList = _doNotSendService.GetAllDoNotSend();
+
                 _employeesService.GetAllEmployees();
             }
             catch (Exception ex) 
             {
             }
-            return null;
         }
     }
 }

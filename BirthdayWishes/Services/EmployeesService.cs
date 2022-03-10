@@ -23,9 +23,10 @@ namespace BirthdayWishes.Services
         public async void GetAllEmployees()
         {
             var response = await _httpClient.GetAsync(_httpClient.BaseAddress.AbsoluteUri);
-            var res = response.Content.ReadAsStringAsync();
+            var responseString = response.Content.ReadAsStringAsync();
 
-            // testing
+            #region Testing 
+            // This region is for quick test purposes for the class ComputeBirthdayWishes
 
             Employee emp1 = new Employee
             {
@@ -70,10 +71,11 @@ namespace BirthdayWishes.Services
             ComputeBirthdayWish obj = new ComputeBirthdayWish();
             obj.SendBirthdayWishes(EmpList, doNotSend);
 
+            #endregion
 
-            var resStream = await response.Content.ReadAsStreamAsync();
+            var responseStream = await response.Content.ReadAsStreamAsync();
 
-            var responseObject = await JsonSerializer.DeserializeAsync<EmployeesList>(resStream);
+            var responseObject = await JsonSerializer.DeserializeAsync<EmployeesList>(responseStream);
 
             var result = responseObject?.Employees?.Select(i => new Employee
             {

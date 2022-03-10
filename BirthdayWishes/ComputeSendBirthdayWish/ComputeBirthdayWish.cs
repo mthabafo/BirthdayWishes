@@ -12,9 +12,9 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
         {
             foreach (Employee employee in empList) 
             {
-                bool dob = IsBirthday(employee);
-                bool withUs = IsEmployeeWithUs(employee);
-                bool doNotWish = DoNotSendWishes(employee, doNotSend);
+              // bool dob = IsBirthday(employee);
+              // bool withUs = IsEmployeeWithUs(employee);
+              // bool doNotWish = DoNotSendWishes(employee, doNotSend);
 
                 if (IsBirthday(employee) && 
                     IsEmployeeWithUs(employee) &&
