@@ -13,6 +13,8 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
         /// </summary>
         public void SendBirthdayWishes(List<Employee> empList, int[] doNotSend) 
         {
+            List<LastNotification> lastNotifications = null;
+
             foreach (Employee employee in empList) 
             {
                  bool dob = IsBirthday(employee);
@@ -24,10 +26,11 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
                     IsEmployeeWithUs(employee) &&
                     !DoNotSendWishes(employee, doNotSend) && !HasBeenNotified(employee)
                     )
-                {
-                    // This message will be sent to email, for now we will display it on Console to keep things simple
+                {                  
+                    lastNotifications.Add(UpdateLastNotification(employee)); // Updates last notification
+                   
                     string message = String.Format("Happy birthday {0} {1}", employee.FirstName, employee.LastName);
-                    Console.WriteLine(message);
+                    Console.WriteLine(message); // This message will be sent to email, for now we will display it on Console to keep things simple
                 }
             }
         }
@@ -95,6 +98,19 @@ namespace BirthdayWishes.ComputeSendBirthdayWish
                 return true;
 
             return false;
+        }
+
+        /// <summary>
+        /// Updates the LastNofication when the employee has been notified
+        /// </summary>
+        /// <returns> The employee Id and LastNotification only </returns>
+        public LastNotification UpdateLastNotification(Employee employee) 
+        {
+            LastNotification lastNotification = new LastNotification(
+                employee.Id, 
+                employee.LastNotification);
+
+            return lastNotification;
         }
     }
 }
